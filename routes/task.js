@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 const path = require("path");
-mongoose.connect("", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/Oficio", { useNewUrlParser: true });
 
 const multer = require("multer");
 
