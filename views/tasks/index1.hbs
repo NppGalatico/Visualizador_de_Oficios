@@ -1,0 +1,233 @@
+<h2> Indicações</h2>
+<p class="float-right">
+	<span class="bg-success text-white  p-2">{{ total1 }} Indicações</span>
+	<a href="/add1" class="btn btn-primary">Adicionar Indicações</a>
+</p>
+
+
+<div class="clearfix"></div>
+<div class="table-responsive-lg">
+	<table class="table table-hover table-bordered table-striped" id="dataTable">
+	<thead class="thead-defaultinverse ">
+		<tr>
+			
+			<th>Indicação</th>
+			<th>Sessão</th>
+			<th>Descrição</th>
+			<th>Destino</th>
+			<th>Processo Municipal</th>
+			<th>Vereador</th>
+			<th>Status</th>
+			<th>Observação</th>
+			<th>Arquivos</th>
+			<th>Ações</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		{{# each model }}
+		<tr>
+			
+			<td>{{ this.indication }}</td>
+			<td>{{ this.sessao }}</td>
+			<td>{{ this.description1 }}</td>
+			<td>{{ this.destiny1 }}</td>
+			<td>{{ this.process1 }}</td>
+			<td>{{ this.vereador }}</td>
+						
+
+			<td>
+				{{#if status1}}
+				<span class="badge badge-success">
+					Deferido
+				</span>
+				{{else }}
+				<span class="badge badge-danger">
+					Em Análise
+				</span>
+				{{/if}}
+				
+			</td>
+
+			
+			<td>{{ this.observation1 }}</td>
+
+			<td>{{ this.arquivo1 }}</td>
+
+
+			<td>
+				<div>
+					<a href="" data-toggle="modal" data-target="#modalView{{ this._id }}" class="btn btn-info btn-sm">Visualizar </a>
+					<a href="#modalEdit{{ this._id }}" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalEdit{{ this._id }}">Editar</a>
+					<a href="#modalDelete{{ this._id }}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete{{ this._id }}">Deletar</a>
+					
+
+					<!-- Edit Modal -->
+				<div class="modal fade" id="modalEdit{{ this._id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Editar - {{ this.indication }}</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form action="/update1" method="post">
+										<input type="hidden" name="id" value="{{ this._id }}">
+										{{# if success}}
+										{{else}}
+										{{# if errors}}
+										<div class="alert alert-danger">
+											{{# each errors}}
+											<p>{{ this.msg }}</p>
+											{{/each}}
+										</div>
+										{{/if}}
+										{{/if}}
+
+										<div class="form-group">
+											<label for="sessao">Sessão</label>
+											<textarea name="sessao" id="sessao" rows="5" class="form-control">{{ this.sessao }}</textarea>
+										</div>
+										
+										<div class="form-group">
+											<label for="description1">Descrição</label>
+											<textarea name="description1" id="description" rows="5" class="form-control">{{ this.description1 }}</textarea>
+										</div>
+
+										<div class="form-group">
+											<label for="destiny1">Destino</label>
+											<input name="destiny1" id="destiny" rows="5" class="form-control">{{ this.destiny1 }}
+										</div>
+
+										
+
+										<div class="form-group">
+											<label for="observation1">Observação</label>
+											<textarea name="observation1" id="observation" rows="5" class="form-control">{{ this.observation1 }}</textarea>
+										</div>
+
+										<div class="form-group">
+											<label for="process1">Processo Municipal</label>
+											<input name="process1" id="process1" rows="5" class="form-control">{{ this.process1}}
+										</div>
+
+										<div class="form-group">
+											<label for="vereador">Vereador</label>
+											<input name="vereador" id="vereador" rows="5" class="form-control">{{ this.vereador }}
+										</div>
+
+										<div class="form-group">
+											<label for="arquivo1">Arquivo</label>
+											<input name="arquivo1" id="arquivo1" rows="5" class="form-control">{{ this.arquivo1 }}
+										</div>
+
+										<div class="form-check">
+											<label for="status1">Situação</label>
+											<br>
+
+											{{#if this.status1 }}
+											<label class="form-check-label text-success">
+												<input type="radio" name="status1" value="true" class="form-check-input"  checked="true"> Deferido
+											</label>
+											<br>
+											<label class="form-check-label text-danger">
+												<input type="radio" name="status1" value="false" class="form-check-input"> Em Análise
+											</label>
+
+											{{ else }}
+											<label class="form-check-label text-success">
+												<input type="radio" name="status1" value="true" class="form-check-input"> Deferido
+											</label>
+											<br>
+											<label class="form-check-label text-danger">
+												<input type="radio" name="status1" value="false" class="form-check-input" checked="true"> Em Análise
+											</label>
+											
+											{{/if}}
+											
+											<br>
+											
+										</div>
+										<button type="submit" class="btn btn-success mt-3">Atualizar</button>
+										<button type="button" class="btn btn-secondary mt-3" data-dismiss="modal">Cancelar</button>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- Delete Modal -->
+					<div class="modal fade" id="modalDelete{{ this._id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title text-danger" id="exampleModalLabel">Deletar indicação ?<mark>{{ this.indication }}</mark></h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form action="/delete2" method="post">
+										<input type="hidden" name="id" value="{{ this._id }}">
+										<button type="submit" class="btn btn-danger mt-3">Deletar</button>
+										<button type="button" class="btn btn-secondary mt-3" data-dismiss="modal">Cancelar</button>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- View Modal -->
+					<div class="modal fade" id="modalView{{ this._id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel"><mark>{{ this.indication }}</mark></h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div>
+										<strong>Sessão: </strong> <br>
+										{{ this.sessao }}
+									</div>
+									<div>
+										<strong>Sobre a indicação: </strong> <br>
+										{{ this.description1 }}
+									</div>
+									<div class="mt-3">
+										<strong> Situação </strong> 
+										<br>
+										{{#if this.status1}}
+										<span class="text-success">Deferido</span>
+										{{else}}
+										<span class="text-danger">Em Análise</span>
+										{{/if}}
+									</div>
+
+									<button type="button" class=" mt-4 btn btn-info" data-dismiss="modal" aria-label="Close">
+										Ok
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+			</td>
+		</tr>
+
+		{{/each}}
+
+	</tbody>
+</table>
+</div>
