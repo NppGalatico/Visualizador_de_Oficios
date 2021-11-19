@@ -11,8 +11,8 @@ Para funcionar o banco:
 
 EQUIPE RESPONSÁVEL PELO DESENVOLVIMENTO DO SOFTWARE
 
-- JOÃO TRAMASSIO - GITHUB: @marcosnsf
-- MARCOS NATHAN - GITHUB: @Sarutobexx
+- JOÃO TRAMASSIO - GITHUB: @Sarutobexx
+- MARCOS NATHAN - GITHUB: @marcosnsf
 - VICTOR MOREIRA - GITHUB: @NppGalatico
 
 
